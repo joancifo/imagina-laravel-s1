@@ -7,6 +7,7 @@ Route::get('/', function () {
     return view('bienvenido');
 });
 
+Route::get('/users/test', [UserController::class, 'test']);
 Route::resource('users', UserController::class);
 
 Route::group(['prefix' => 'category', 'middleware' => [\App\Http\Middleware\EnsureHasSession::class]], function () {
