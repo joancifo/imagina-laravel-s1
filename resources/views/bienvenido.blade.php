@@ -19,6 +19,7 @@
         <th>
             Código
         </th>
+        <th>Categoría</th>
         <th>
             Descripción
         </th>
@@ -33,6 +34,9 @@
                 {{ $product->code }}
             </td>
             <td>
+                {{ $product->category->code }}
+            </td>
+            <td>
                 {{ $product->description }}
             </td>
             <td  @if($product->price > 3) style="background: green" @endif>
@@ -41,12 +45,27 @@
         </tr>
     @endforeach
 
+</table>
+
+<ul>
+@foreach($categories as $category)
+<li>
+    {{ $category->code }}
+    <ol>
+        @foreach($category->products as $product)
+            <li>
+                {{ $product->code }}
+            </li>
+        @endforeach
+    </ol>
+</li>
+@endforeach
+
 {{--    @if(now()->isAfter(now()->addDay()))--}}
 {{--        <div>Hoy es antes que mañana</div>--}}
 {{--    @else--}}
 {{--        <div>No! Hoy es antes que mañana</div>--}}
 {{--    @endif--}}
-</table>
-
+</ul>
 </body>
 </html>

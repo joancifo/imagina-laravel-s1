@@ -11,6 +11,7 @@ Route::get('/', function () {
 
     return view('bienvenido', [
         'products' => $products,
+        'categories' => \App\Models\Category::all(),
         'firstProduct' => $firstProduct
     ]);
 });
