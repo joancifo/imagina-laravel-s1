@@ -4,7 +4,15 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('bienvenido');
+    $products = \App\Models\Product::all();
+
+    $firstProduct = $products->first();
+
+
+    return view('bienvenido', [
+        'products' => $products,
+        'firstProduct' => $firstProduct
+    ]);
 });
 
 Route::resource('users', UserController::class);
