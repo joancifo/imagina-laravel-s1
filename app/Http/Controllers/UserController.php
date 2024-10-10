@@ -71,26 +71,4 @@ class UserController extends Controller
     {
         //
     }
-
-    public function test()
-    {
-////        User::all();
-//        return User::query()
-////            ->where('id', '<', 3)
-////            ->whereLike('name',  '%Wiegand%')
-////            ->limit(2)
-////            ->toSql()
-//            ->get()
-            ;
-
-//          return  User::query()->where('id', '=', 3)->delete();
-        User::query()->where('id', 4)->update([
-            'name' => 'Joan'
-        ]);
-
-        return User::query()->where('id', 4)->limit(1)->get()->first();
-//        return User::find(4);
-
-        $sql = "UPDATE users SET name = 'Joan' WHERE id = 4";
-    }
 }
