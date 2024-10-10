@@ -14,6 +14,7 @@ class ProductController extends Controller
     {
         $products = Product::query()
             ->where('active', true)
+            ->withoutGlobalScope('is_active')
 //            ->whereRaw('EXISTS (SELECT 1 FROM ....)')
             ->get();
 

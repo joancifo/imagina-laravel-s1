@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Category::class)->constrained();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
