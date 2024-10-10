@@ -17,6 +17,8 @@ return new class extends Migration
             $table->float('price', 2)->default(0);
             $table->text('description')->nullable();
             $table->string('slug')->nullable();
+            $table->foreignIdFor(\App\Models\Category::class)->constrained();
+
             $table->timestamps();
         });
     }

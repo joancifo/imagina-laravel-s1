@@ -21,6 +21,7 @@ class ProductFactory extends Factory
             'code' => fake()->numberBetween(1000, 9999),
             'description' => fake()->sentence(2),
             'price' => fake()->randomFloat(2, 0.05, 999.99),
+            'category_id' => 1
         ];
     }
 }
