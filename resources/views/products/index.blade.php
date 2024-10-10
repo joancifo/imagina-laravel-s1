@@ -1,7 +1,7 @@
 <div>
     @foreach($products as $product)
         <div>
-            {{ $product->code }}
+            {{ $product->description }}
         </div>
     @endforeach
 </div>

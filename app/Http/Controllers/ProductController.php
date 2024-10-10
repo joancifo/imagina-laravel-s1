@@ -12,8 +12,14 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $products = Product::query()
+            ->where('active', true)
+//            ->whereRaw('EXISTS (SELECT 1 FROM ....)')
+            ->get();
+
+
         return view('products.index', [
-            'products' => Product::all()
+            'products' => $products
         ]);
     }
 
