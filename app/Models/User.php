@@ -44,4 +44,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+//    public function getFullNameAttribute()
+//    {
+//
+//    }
+//
+//    public function setFullNameAttribute($newValue)
+//    {
+//        $this->attributes['name'] = $newValue;
+//    }
 }
