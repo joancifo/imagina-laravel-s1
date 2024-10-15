@@ -11,6 +11,9 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
                 </div>
+
+                <livewire:list-of-planes :planes="$planes" />
+{{--                @livewire(ListOfPlanes::class, ['planes' => $planes])--}}
             </div>
         </div>
     </div>
