@@ -1,3 +1,5 @@
+# Ejercicio 10/10/2024
+
 - Crear un modelo llamado Producto con el controlador llamado ProductController (o valor por defecto) y su migración
   - `sail php artisan make:model ....`
 - En la migración añadir code como string
