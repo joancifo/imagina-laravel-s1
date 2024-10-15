@@ -31,5 +31,6 @@ Route::group(['prefix' => 'category', 'middleware' => [\App\Http\Middleware\Ensu
     })->name('categoria.detail-page');
 });
 
-
+Route::post('/iniciar-sesion', [UserController::class, 'login'])->name('login');
+Route::get('iniciar-sesion', [UserController::class, 'loginForm']);
 

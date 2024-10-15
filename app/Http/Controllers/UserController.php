@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -70,5 +72,30 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function loginForm()
+    {
+        return view('login');
+    }
+
+    public function login()
+    {
+        $data = \request()->all();
+
+        $result = User::where('email', $data['username'])
+//            ->where('password', Hash::make($data['password']))
+            ->first()
+        ;
+
+
+        if ($result and Hash::check($data['password'], $result->password)) {
+            session()->put('is_logged_in', true);
+            return redirect()->to('dashboard');
+        } else {
+           return redirect()->back()->withInput()
+//               ->with(['test' => 'Error de usuario'])
+               ;
+        }
     }
 }
