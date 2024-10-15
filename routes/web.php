@@ -1,36 +1,20 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $products = \App\Models\Product::query()
-        ->with('category')
-        ->get();
-
-
-    return view('bienvenido', [
-        'products' => $products,
-        'categories' => \App\Models\Category::all(),
-    ]);
+    return view('welcome');
 });
 
-//Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index']);
-Route::resource('products', \App\Http\Controllers\ProductController::class);
-Route::resource('categories', \App\Http\Controllers\CategoryController::class);
-Route::resource('users', UserController::class);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('product-list', function(){
-    return \App\Models\Product::all();
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::group(['prefix' => 'category', 'middleware' => [\App\Http\Middleware\EnsureHasSession::class]], function () {
-    Route::get('/{categoria}/{page}', function (string $categoria, string $page) {
-
-        dd($categoria, $page);
-    })->name('categoria.detail-page');
-});
-
-Route::post('/iniciar-sesion', [UserController::class, 'login'])->name('login');
-Route::get('iniciar-sesion', [UserController::class, 'loginForm']);
-
+require __DIR__.'/auth.php';
