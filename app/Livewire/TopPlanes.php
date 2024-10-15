@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Plane;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -39,6 +40,18 @@ class TopPlanes extends Component
 
     public function mount()
     {
-        $this->planes = Plane::all();
+        $this->planes = Plane::query()
+            ->withCount('flights')
+            ->where(function (Builder $query) {
+                $query
+                    ->whereLike('code', '%a%')
+                    ->orWhereLike('code', '%n%');
+            })
+            ->has('flights')
+            ->get();
+
+//        $this->planes = Plane::query()
+//            ->join('flights', 'plane_id', 'flights.id')
+//            ->get();
     }
 }

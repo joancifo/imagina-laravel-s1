@@ -17,4 +17,6 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+Route::resource('products', \App\Http\Controllers\ProductController::class);
+
 require __DIR__.'/auth.php';

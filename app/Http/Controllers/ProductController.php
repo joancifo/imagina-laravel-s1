@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
+use App\Rules\Uppercase;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -37,9 +39,18 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'code' => 'required|unique:products,code'
+        $data = $request->validate([
+//            'code' => 'required|unique:products,code',
+            'code' => ['required','unique:products,code', new Uppercase],
+            'price' => 'required|decimal:2',
+            'description' => 'string'
         ]);
+
+        $data['category_id'] = Category::first()->id;
+
+        Product::create($data);
+
+        return back();
     }
 
     /**

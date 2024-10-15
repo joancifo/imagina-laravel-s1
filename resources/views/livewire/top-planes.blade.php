@@ -3,7 +3,7 @@
     <div>
         <ul>
             @foreach($planes as $plane)
-                <li>{{ $plane->code }}</li>
+                <li>{{ $plane->code }} {{{ $plane->flights_count }}}</li>
             @endforeach
         </ul>
 

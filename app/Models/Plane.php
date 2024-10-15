@@ -10,4 +10,14 @@ class Plane extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function flights()
+    {
+        return $this->hasMany(Flight::class);
+    }
+
+    public function airports()
+    {
+        return $this->belongsToMany(Airport::class);
+    }
 }
